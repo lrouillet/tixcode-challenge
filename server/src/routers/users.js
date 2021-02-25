@@ -15,6 +15,17 @@ router.post('/users', async (req, res) => {
     }
 });
 
+router.post('/users/login', async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.username, req.body.password);
+        console.log(user);
+        const token = await user.generateAuthToken();
+        res.send({ user, token });
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 router.get('/users', async (req, res) => {
     const limit = parseInt(req.query.limit);
     const skip = parseInt(req.query.skip);

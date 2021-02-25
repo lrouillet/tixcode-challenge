@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    user: {
+    username: {
         type: String,
         unique: true,
         required: true,
@@ -74,6 +74,22 @@ userSchema.methods.toJSON = function () {
     delete userObject.tokens;
 
     return userObject;
+}
+
+userSchema.statics.findByCredentials = async (username, password) => {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        throw new Error('Unable to login');
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        throw new Error('Unable to login');
+    }
+
+    return user;
 }
 
 // Antes de guardar el password, lo hasheo
