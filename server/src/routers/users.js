@@ -15,4 +15,16 @@ router.post('/users', async (req, res) => {
     }
 });
 
+router.get('/users', async (req, res) => {
+    const limit = parseInt(req.query.limit);
+    const skip = parseInt(req.query.skip);
+    
+    // Quito limit y skip del objeto query para que no interfieran en los filtros
+    delete req.query.limit;
+    delete req.query.skip;
+
+    const users = await User.find(req.query, null, { limit, skip });
+    res.status(200).send(users);
+});
+
 module.exports = router;
