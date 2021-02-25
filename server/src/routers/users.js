@@ -39,4 +39,21 @@ router.get('/users', auth, async (req, res) => {
     res.status(200).send(users);
 });
 
+router.get('/users/:id', auth, async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const user = await User.findOne({ _id });
+        if (!user) {
+            res.status(404).send();
+        }
+
+        res.send(user);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+
+
+
+});
+
 module.exports = router;
