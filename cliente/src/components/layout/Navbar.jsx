@@ -10,7 +10,7 @@ const NavbarComponent = () => {
     }
     return (
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">TIXCODE Challenge</Navbar.Brand>
+            <Navbar.Brand href="#home">TIXCODE Locs</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
