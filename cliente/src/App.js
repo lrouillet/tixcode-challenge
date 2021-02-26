@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Login from './components/views/Login';
-import Signup from './components/views/Signup';
-import Home from './components/views/Home';
-import User from './components/views/User';
+import Login from './views/Login';
+import Signup from './views/Signup';
+import Home from './views/Home';
+import User from './views/User';
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
