@@ -52,6 +52,10 @@ router.get('/users', auth, async (req, res) => {
     res.status(200).send(users);
 });
 
+router.get('/users/me', auth, async (req, res) => {
+    res.send(req.user);
+});
+
 router.get('/users/:id', auth, async (req, res) => {
     const _id = req.params.id;
     try {
