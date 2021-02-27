@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 const FooterElement = styled.footer`
-    position: absolute;
+    margin-bottom: 0px;
     bottom: 0;
     width: 100%;
     height: 60px;
