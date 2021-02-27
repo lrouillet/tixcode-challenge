@@ -18,6 +18,8 @@ const FormContainer = styled.div`
     background-color: white;
     @media (max-width: 992px) {
         margin-left: 0;
+        padding-left: 90px;
+        padding-right: 90px;
     }
 `
 
