@@ -49,7 +49,7 @@ const Login = (props) => {
                 <h1 className="h3 mb-3">Inicio de sesión</h1>
                 <input type="text" name="username" id="inputUsername" className="form-control" placeholder="Usuario" required={true} autoFocus="" onChange={onChange} />
                 <input type="password" name="password" id="inputPassword" className="form-control" placeholder="Contraseña" required={true} onChange={onChange} />
-                { error ? ( <div className="alert alert-danger" role="alert"> Usuario y/o contraseña inválidos </div> ) : null }
+                { error.error ? ( <div className="alert alert-danger" role="alert"> Usuario y/o contraseña inválidos </div> ) : null }
                 <button className="btn btn-lg btn-primary w-100" type="submit">Iniciar Sesión</button>
             </SignInForm>
         </MainContainer>

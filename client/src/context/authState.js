@@ -102,7 +102,11 @@ const AuthState = props => {
     // Cierra la sesión del usuario
     const logout = () => {
         dispatch({
-            type: LOGOUT
+            type: LOGOUT,
+            payload: {
+                error: false,
+                errors: {}
+            }
         })
     }
 

@@ -7,11 +7,7 @@ import AuthContext from '../../context/authContext';
 const NavbarComponent = () => {
 
     const authContext = useContext(AuthContext);
-    const { authenticated } = authContext;
-
-    const signout = () => {
-        console.log('session finished');
-    }
+    const { authenticated, logout } = authContext;
     
     return (
         <Navbar bg="light" expand="lg">
@@ -38,7 +34,7 @@ const NavbarComponent = () => {
                 </Nav>
                 {
                     authenticated ?
-                    (<Button variant="danger" onClick={signout}>Cerrar Sesión</Button>) :
+                    (<Button variant="danger" onClick={logout}>Cerrar Sesión</Button>) :
                     (<Button variant="primary" href="/signup">Regístrate</Button>)
                 }
             </Navbar.Collapse>
