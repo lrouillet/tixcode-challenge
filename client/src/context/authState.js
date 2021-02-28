@@ -17,7 +17,7 @@ const AuthState = props => {
         token: localStorage.getItem('token'),
         authenticated: null,
         user: null, 
-        message: null, 
+        error: null, 
         loading: true
     }
 
@@ -77,15 +77,15 @@ const AuthState = props => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error.response.data.msg);
-            const alerta = {
+            console.log(error.response.data);
+            const alert = {
                 msg: error.response.data.msg,
-                categoria: 'alerta-error'
+                cathegory: 'error-alert'
             }
 
             dispatch({
                 type: LOGIN_ERROR,
-                payload: alerta
+                payload: alert
             })
         }
     }
@@ -103,7 +103,7 @@ const AuthState = props => {
                 token: state.token,
                 authenticated: state.authenticated,
                 user: state.user,
-                message: state.message,
+                error: state.error,
                 loading: state.loader,
                 checkAuth,
                 userSignUp,

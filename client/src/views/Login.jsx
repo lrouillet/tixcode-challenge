@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+import MainContainer from '../components/layout/MainContainer';
+
 import AuthContext from '../context/authContext';
 
 const SignInForm = styled.form`
@@ -15,7 +17,7 @@ const SignInForm = styled.form`
 
 const Login = (props) => {
     const authContext = useContext(AuthContext);
-    const { login, authenticated } = authContext;
+    const { login, authenticated, error } = authContext;
 
     const [formData, setFormData] = useState({
         username: '',
@@ -42,12 +44,15 @@ const Login = (props) => {
     }
 
     return (
-        <SignInForm onSubmit={onSubmit}>
-            <h1 className="h3 mb-3">Inicio de sesión</h1>
-            <input type="text" name="username" id="inputUsername" className="form-control" placeholder="Usuario" required={true} autoFocus="" onChange={onChange} />
-            <input type="password" name="password" id="inputPassword" className="form-control" placeholder="Contraseña" required={true} onChange={onChange} />
-            <button className="btn btn-lg btn-primary w-100" type="submit">Iniciar Sesión</button>
-        </SignInForm>
+        <MainContainer>
+            <SignInForm onSubmit={onSubmit}>
+                <h1 className="h3 mb-3">Inicio de sesión</h1>
+                <input type="text" name="username" id="inputUsername" className="form-control" placeholder="Usuario" required={true} autoFocus="" onChange={onChange} />
+                <input type="password" name="password" id="inputPassword" className="form-control" placeholder="Contraseña" required={true} onChange={onChange} />
+                { error ? ( <div className="alert alert-danger" role="alert"> Usuario y/o contraseña inválidos </div> ) : null }
+                <button className="btn btn-lg btn-primary w-100" type="submit">Iniciar Sesión</button>
+            </SignInForm>
+        </MainContainer>
     );
 }
  

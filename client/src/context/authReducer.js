@@ -35,7 +35,7 @@ const types = ( state, action ) => {
                 token: null,
                 user: null,
                 authenticated: null,
-                message: action.payload, 
+                error: action.payload, 
                 loading: false
             }
                 

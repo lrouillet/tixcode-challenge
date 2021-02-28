@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
+        unique: 'Ya existe un usuario registrado con ese email',
         required: true,
         trim: true,
         lowercase: true,
@@ -28,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     username: {
         type: String,
-        unique: true,
+        unique: 'Usuario ya registrado',
         required: true,
         trim: true,
         lowercase: true,
@@ -54,6 +55,8 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true,
 });
+
+userSchema.plugin(beautifyUnique);
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
