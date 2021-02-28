@@ -17,7 +17,10 @@ const AuthState = props => {
         token: localStorage.getItem('token'),
         authenticated: null,
         user: null, 
-        error: null, 
+        error: {
+            error: false,
+            errors: {}
+        }, 
         loading: true
     }
 
@@ -32,14 +35,13 @@ const AuthState = props => {
                 payload: res.data
             });
         } catch (error) {
-            const alert = {
-                msg: error,
-                cathegory: 'error-alert'
-            }
-
+            console.log(error.response.data.errors);
             dispatch({
                 type: SIGNUP_ERROR,
-                payload: alert
+                payload: {
+                    error: true,
+                    errors: error.response.data.errors
+                }
             })
         }
     }
@@ -49,7 +51,11 @@ const AuthState = props => {
             const token = localStorage.getItem('token');
             if (!token) {
                 return dispatch({
-                    type: LOGIN_ERROR
+                    type: LOGIN_ERROR,
+                    payload: {
+                        error: false,
+                        errors: {}
+                    }
                 })
             }
 
@@ -63,7 +69,11 @@ const AuthState = props => {
         } catch (e) {
             console.log('error', e);
             dispatch({
-                type: LOGIN_ERROR
+                type: LOGIN_ERROR,
+                payload: {
+                    error: false,
+                    errors: e
+                }
             });
         }
     }
@@ -77,15 +87,14 @@ const AuthState = props => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error.response.data);
-            const alert = {
-                msg: error.response.data.msg,
-                cathegory: 'error-alert'
-            }
+            console.log(error.response);
 
             dispatch({
                 type: LOGIN_ERROR,
-                payload: alert
+                payload: {
+                    error: true,
+                    errors: error.response
+                }
             })
         }
     }

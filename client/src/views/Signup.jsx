@@ -27,7 +27,7 @@ const FormContainer = styled.div`
 const Signup = (props) => {
 
     const authContext = useContext(AuthContext);
-    const { authenticated,  userSignUp } = authContext;
+    const { authenticated,  userSignUp, error } = authContext;
 
     useEffect(() => {
         if (authenticated) {
@@ -43,8 +43,25 @@ const Signup = (props) => {
         confirmPass: ''
     });
 
+    const [formError, setFormError] = useState({ fieldName: '' , message: '' });
+
     const onSubmit = (e) => {
         e.preventDefault();
+
+        if (formData.password !== formData.confirmPass) {
+            return setFormError({
+                fieldName: 'confirmPass',
+                message: 'Las contraseñas no coinciden'
+            });
+        } else if (formData.password.length < 8) {
+            return setFormError({
+                fieldName: 'password',
+                message: 'Contraseña demasiado corta (al menos 8 caracteres)'
+            });
+        } else {
+            setFormError({ fieldName: '', message: ''});
+        }
+
         userSignUp(formData);
     }
 
@@ -66,24 +83,34 @@ const Signup = (props) => {
                             <input
                                 type="text"
                                 name="username"
-                                className="form-control"
+                                className={
+                                    error.errors.username ?
+                                    "form-control is-invalid" :
+                                    "form-control"
+                                }
                                 id="inputUserName"
                                 placeholder="Usuario"
                                 required={true}
                                 onChange={onChange}
                             />
+                            { error.errors.username ? (<div className="invalid-feedback">{error.errors.username.message}</div>) : null }
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="inputEmail">Email</label>
                             <input
                                 type="email"
                                 name="email"
-                                className="form-control"
+                                className={
+                                    error.errors.email ?
+                                    "form-control is-invalid" :
+                                    "form-control"
+                                }
                                 id="inputEmail"
                                 placeholder="Email"
                                 required={true}
                                 onChange={onChange}
                             />
+                            { error.errors.email ? (<div className="invalid-feedback">{error.errors.email.message}</div>) : null }
                         </div>
                     </div>
                     <div className="form-row">
@@ -92,24 +119,30 @@ const Signup = (props) => {
                             <input
                                 type="password"
                                 name="password"
-                                className="form-control"
+                                className={
+                                    formError.fieldName === 'confirmPass' || formError.fieldName === 'password' ?
+                                    "form-control is-invalid" :
+                                    "form-control"
+                                }
                                 id="inputPassword"
                                 placeholder="Contraseña"
                                 required={true}
                                 onChange={onChange}
                             />
+                            { formError.fieldName === 'password' ? (<div className="invalid-feedback">{formError.message}</div>) : null }
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="inputPasswordConfirm">Confirmar Contraseña</label>
                             <input
                                 type="password"
                                 name="confirmPass"
-                                className="form-control"
+                                className={ formError.fieldName === 'confirmPass' ? "form-control is-invalid" : "form-control" }
                                 id="inputPasswordConfirm"
                                 placeholder="Contraseña"
                                 required={true}
                                 onChange={onChange}
                             />
+                            { formError.fieldName === 'confirmPass' ? (<div className="invalid-feedback">{formError.message}</div>) : null }
                         </div>
                     </div>
                     <div className="form-row">
