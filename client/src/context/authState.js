@@ -1,12 +1,12 @@
 import React, { useReducer } from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
-import axiosClient from '../http-common';
+import http from '../http-common';
 
 import { 
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
-    GET_USER,
+    AUTH_SUCCESS,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     LOGOUT
@@ -25,14 +25,13 @@ const AuthState = props => {
 
     const userSignUp = async body => {
         try {
-            const res = await axiosClient.post('/users', body);
+            const res = await http.post('/users', body);
 
             dispatch({
                 type: SIGNUP_SUCCESS,
                 payload: res.data
             });
         } catch (error) {
-            // console.log(error.response.data.msg);
             const alert = {
                 msg: error,
                 cathegory: 'error-alert'
@@ -45,10 +44,33 @@ const AuthState = props => {
         }
     }
 
-    // Cuando el usuario inicia sesión
+    const checkAuth = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                return dispatch({
+                    type: LOGIN_ERROR
+                })
+            }
+
+            const res = await http.get('/users/me');
+            console.log(res);
+
+            dispatch({
+                type: AUTH_SUCCESS,
+                payload: res.data.user
+            });
+        } catch (e) {
+            console.log('error', e);
+            dispatch({
+                type: LOGIN_ERROR
+            });
+        }
+    }
+
     const login = async body => {
         try {
-            const res = await axiosClient.post('/users/login', body);
+            const res = await http.post('/users/login', body);
             
             dispatch({
                 type: LOGIN_SUCCESS,
@@ -83,6 +105,7 @@ const AuthState = props => {
                 user: state.user,
                 message: state.message,
                 loading: state.loader,
+                checkAuth,
                 userSignUp,
                 login,
                 logout

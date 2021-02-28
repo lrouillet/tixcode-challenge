@@ -1,25 +1,46 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import AuthContext from '../../context/authContext';
 
 const NavbarComponent = () => {
+
+    const authContext = useContext(AuthContext);
+    const { authenticated } = authContext;
 
     const signout = () => {
         console.log('session finished');
     }
+    
     return (
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">TIXCODE Locs</Navbar.Brand>
+            <Navbar.Brand href="/home">TIXCODE Locs</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/home">Inicio</Nav.Link>
-                </Nav>
+                {
+                    authenticated ? (
+                        <Nav className="mr-auto">
+                            <Nav.Link href="/home">Inicio</Nav.Link>
+                        </Nav>
+                    ) :
+                    (
+                        <Nav className="mr-auto">
+                        </Nav>
+                    )
+                }
                 <Nav>
-                    <Nav.Link href="#">Mi perfil</Nav.Link>
+                    {
+                        authenticated ?
+                        (<Nav.Link href="#">Mi perfil</Nav.Link>) :
+                        (<Nav.Link href="/">Inicia Sesión</Nav.Link>)
+                    }
                 </Nav>
-                <Button variant="danger" onClick={signout}>Cerrar Sesión</Button>
+                {
+                    authenticated ?
+                    (<Button variant="danger" onClick={signout}>Cerrar Sesión</Button>) :
+                    (<Button variant="primary" href="/signup">Regístrate</Button>)
+                }
             </Navbar.Collapse>
         </Navbar>
     );

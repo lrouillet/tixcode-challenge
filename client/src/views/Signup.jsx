@@ -27,7 +27,7 @@ const FormContainer = styled.div`
 const Signup = (props) => {
 
     const authContext = useContext(AuthContext);
-    const { message, authenticated,  userSignUp } = authContext;
+    const { authenticated,  userSignUp } = authContext;
 
     useEffect(() => {
         if (authenticated) {

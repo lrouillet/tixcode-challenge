@@ -1,13 +1,13 @@
 import {
     SIGNUP_SUCCESS,
     SIGNUP_ERROR,
-    GET_USER,
+    AUTH_SUCCESS,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     LOGOUT
 } from '../types/index';
 
-export default ( state, action ) => {
+const types = ( state, action ) => {
     switch (action.type) {
         case SIGNUP_SUCCESS:
         case LOGIN_SUCCESS:
@@ -17,6 +17,13 @@ export default ( state, action ) => {
                 ...state,
                 authenticated: true,
                 msg: null,
+                loading: false
+            }
+        case AUTH_SUCCESS:
+            return {
+                ...state,
+                authenticated: true,
+                user: action.payload.user,
                 loading: false
             }
         case LOGOUT:
@@ -35,3 +42,5 @@ export default ( state, action ) => {
         default: return state;
     }
 }
+
+export default types;
