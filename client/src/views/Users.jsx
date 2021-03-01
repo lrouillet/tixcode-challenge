@@ -33,21 +33,25 @@ const Users = (props) => {
 
     const fetchData = async () => {
         if (!appStatus.loading) return;
-
-        const user = (await http.get(`/users/${params.id}`)).data;
-        const coordinates = (await axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${user.address}&key=${process.env.REACT_APP_API_KEY}`
-        ))
-        .data
-        .results[0]
-        .geometry
-        .location;
-
-        setAppStatus({
-            loading: false,
-            user,
-            coordinates
-        });
+        try {
+            const user = (await http.get(`/users/${params.id}`)).data;
+            const geoData = (await axios.get(
+                `https://maps.googleapis.com/maps/api/geocode/json?address=${user.address}&key=${process.env.REACT_APP_API_KEY}`
+            )).data
+    
+            const coordinates = geoData.results[0] ? geoData.results[0].geometry.location : {lat: 0, lng: 0};
+            setAppStatus({
+                loading: false,
+                user,
+                coordinates
+            });
+        } catch (e) {
+            setAppStatus({
+                loading: false,
+                user: {},
+                coordinates: {lat: 0, lng: 0}
+            });
+        }
     }
 
 
@@ -56,7 +60,7 @@ const Users = (props) => {
             {!appStatus.loading ?
             <Map
                 coordinates={appStatus.coordinates} 
-                googleMapURL={"https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCGb1DC2QzMwBfrVsuryy3WFza-UoT2mZw"}    
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.REACT_APP_API_KEY}`}    
                 containerElement={<div style={{height: '400px'}}></div>}
                 loadingElement={<p>Cargando</p>}
                 mapElement={<div style={{ height: `100%` }} />}

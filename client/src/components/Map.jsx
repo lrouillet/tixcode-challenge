@@ -11,7 +11,11 @@ const Map = ({ coordinates, zoomLevel }) => {
     return (
         <GoogleMap
             defaultZoom={zoomLevel | 15}
-            defaultCenter={coordinates}
+            defaultCenter={
+                Object.keys(coordinates).length !== 0 ?
+                coordinates :
+                {lat: 0, lng: 0}
+            }
         >
             <Marker position={coordinates} />
         </GoogleMap>
