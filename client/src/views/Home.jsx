@@ -1,13 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import MainContainer from '../components/layout/MainContainer'
 import UserScroll from '../components/UsersScroll'
-
-const UsersContainer = styled.div`
-    margin: 30px 10%;
-    padding: 20px;
-`
 
 const Home = () => {
     return (

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
     GoogleMap,
     withScriptjs,
     withGoogleMap,
     Marker
 } from 'react-google-maps'
-
-import axios from 'axios';
 
 const Map = ({ coordinates, zoomLevel }) => {
 

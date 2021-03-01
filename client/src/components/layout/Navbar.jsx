@@ -29,7 +29,7 @@ const NavbarComponent = () => {
                     {
                         authenticated ?
                         (<Nav.Link href={`/users/${user._id}`}>{user.username}</Nav.Link>) :
-                        (<Nav.Link href="/">Inicia Sesión</Nav.Link>)
+                        (<Nav.Link href="/login">Inicia Sesión</Nav.Link>)
                     }
                 </Nav>
                 {

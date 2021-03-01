@@ -18,10 +18,11 @@ function App() {
         <Router>
             <Navbar />
             <Switch>
-                <AuthRoute exact path="/" type={'guest'} comp={Login} />
-                <AuthRoute exact path="/signup" type={'guest'} comp={Signup} />
+                <AuthRoute exact path="/" type={'guest'} comp={Signup} />
+                <AuthRoute exact path="/login" type={'guest'} comp={Login} />
                 <AuthRoute exact path="/home" type={'private'} comp={Home} />
                 <AuthRoute exact path="/users/:id" type={'private'} comp={Users} />
+                <AuthRoute type={'private'} comp={Home} />
             </Switch>
             <Footer/>
         </Router>
