@@ -17,13 +17,14 @@ const types = ( state, action ) => {
                 ...state,
                 authenticated: true,
                 msg: null,
+                user: action.payload,
                 loading: false
             }
         case AUTH_SUCCESS:
             return {
                 ...state,
                 authenticated: true,
-                user: action.payload.user,
+                user: action.payload,
                 loading: false
             }
         case LOGOUT:

@@ -7,7 +7,7 @@ import AuthContext from '../../context/authContext';
 const NavbarComponent = () => {
 
     const authContext = useContext(AuthContext);
-    const { authenticated, logout } = authContext;
+    const { authenticated, logout, user } = authContext;
     
     return (
         <Navbar bg="light" expand="lg">
@@ -28,7 +28,7 @@ const NavbarComponent = () => {
                 <Nav>
                     {
                         authenticated ?
-                        (<Nav.Link href="#">Mi perfil</Nav.Link>) :
+                        (<Nav.Link href={`/users/${user.username}`}>{user.username}</Nav.Link>) :
                         (<Nav.Link href="/">Inicia Sesión</Nav.Link>)
                     }
                 </Nav>

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Login from './views/Login';
 import Signup from './views/Signup';
 import Home from './views/Home';
-import User from './views/User';
+import Users from './views/Users';
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -21,7 +21,7 @@ function App() {
                 <AuthRoute exact path="/" type={'guest'} comp={Login} />
                 <AuthRoute exact path="/signup" type={'guest'} comp={Signup} />
                 <AuthRoute exact path="/home" type={'private'} comp={Home} />
-                <AuthRoute exact path="/user/:username" type={'private'} comp={User} />
+                <AuthRoute path="/users" type={'private'} comp={Users} />
             </Switch>
             <Footer/>
         </Router>

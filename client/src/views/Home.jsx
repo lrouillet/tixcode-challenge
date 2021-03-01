@@ -1,8 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import MainContainer from '../components/layout/MainContainer'
+import UserScroll from '../components/UsersScroll'
+
+const UsersContainer = styled.div`
+    margin: 30px 10%;
+    padding: 20px;
+`
 
 const Home = () => {
     return (
-        <h1>Home</h1>
+        <MainContainer>
+            <div className="jumbotron jumbotron-fluid">
+                <div className="container">
+                    <h1 className="display-4">TIXCODE Locs</h1>
+                    <p className="lead">La base de datos de ubicaciones más grande del país.</p>
+                </div>
+            </div>
+            <UserScroll />
+        </MainContainer>
     );
 }
  

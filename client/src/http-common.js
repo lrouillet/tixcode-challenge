@@ -2,17 +2,17 @@ import axios from 'axios';
 
 const fetchClient = () => {
   const defaultOptions = {
-    baseURL: 'http://localhost:8080',
+    baseURL: process.env.REACT_APP_BASE_URL,
     method: 'get',
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  // Create instance
+  // Crear instancia
   let instance = axios.create(defaultOptions);
 
-  // Set the AUTH token for any request
+  // Setear token para cualquier request
   instance.interceptors.request.use(function (config) {
     const token = localStorage.getItem('token');
     config.headers.Authorization =  token ? `Bearer ${token}` : '';
