@@ -66,6 +66,7 @@ const UsersScroll = (props) => {
                 {fetchedData.map((user) => (
                     <UserCard
                         key={user._id}
+                        _id={user._id}
                         username={user.username}
                         address={user.address}
                     />

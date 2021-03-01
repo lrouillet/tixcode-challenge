@@ -14,7 +14,7 @@ const UserCard = (props) => {
             </div>
             <div className="card-body">
                 <h5 className="card-title">{props.address}</h5>
-                <a href={`/users/${props.username}`} className="btn btn-primary">Ver más</a>
+                <a href={`/users/${props._id}`} className="btn btn-primary">Ver más</a>
             </div>
         </CardContainer>
     );

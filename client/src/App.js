@@ -21,7 +21,7 @@ function App() {
                 <AuthRoute exact path="/" type={'guest'} comp={Login} />
                 <AuthRoute exact path="/signup" type={'guest'} comp={Signup} />
                 <AuthRoute exact path="/home" type={'private'} comp={Home} />
-                <AuthRoute path="/users" type={'private'} comp={Users} />
+                <AuthRoute exact path="/users/:id" type={'private'} comp={Users} />
             </Switch>
             <Footer/>
         </Router>

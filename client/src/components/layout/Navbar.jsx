@@ -28,7 +28,7 @@ const NavbarComponent = () => {
                 <Nav>
                     {
                         authenticated ?
-                        (<Nav.Link href={`/users/${user.username}`}>{user.username}</Nav.Link>) :
+                        (<Nav.Link href={`/users/${user._id}`}>{user.username}</Nav.Link>) :
                         (<Nav.Link href="/">Inicia Sesión</Nav.Link>)
                     }
                 </Nav>
