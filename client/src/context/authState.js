@@ -35,7 +35,6 @@ const AuthState = props => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error.response.data.errors);
             dispatch({
                 type: SIGNUP_ERROR,
                 payload: {
@@ -60,14 +59,12 @@ const AuthState = props => {
             }
 
             const res = await http.get('/users/me');
-            console.log(res);
 
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data.user
             });
         } catch (e) {
-            console.log('error', e);
             dispatch({
                 type: LOGIN_ERROR,
                 payload: {
@@ -87,7 +84,6 @@ const AuthState = props => {
                 payload: res.data
             });
         } catch (error) {
-            console.log(error.response);
 
             dispatch({
                 type: LOGIN_ERROR,

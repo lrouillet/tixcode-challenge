@@ -22,6 +22,7 @@ const UsersScroll = (props) => {
 
     useEffect(() => {
         fetchMoreData();
+        // eslint-disable-next-line
     },[]);
 
     const PAGE_SIZE = 3;
@@ -29,7 +30,7 @@ const UsersScroll = (props) => {
     const fetchMoreData = async () => {
 
         const res = await http.get(`/users?limit=${PAGE_SIZE}&skip=${PAGE_SIZE*page}`);
-        console.log(res);
+
 
         setHasMore(res.data.length >= PAGE_SIZE);
 
